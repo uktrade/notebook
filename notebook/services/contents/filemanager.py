@@ -309,7 +309,7 @@ class FileContentsManager(FileManagerMixin, ContentsManager):
             model['content'] = contents = []
             os_dir = self._get_os_path(path)
             for name in os.listdir(os_dir):
-                logger.warning("Looking at %s", name)
+                self.log.warning("Looking at %s", name)
                 try:
                     os_path = os.path.join(os_dir, name)
                 except UnicodeDecodeError as e:

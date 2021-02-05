@@ -318,9 +318,9 @@ class FileContentsManager(FileManagerMixin, ContentsManager):
                     continue
 
                 try:
-                    self.log.warning("os.lstat begin %s %s", name, datetime.datetime.now())
+                    self.log.warning("os.lstat begin %s %s", name, datetime.now())
                     st = os.lstat(os_path)
-                    self.log.warning("os.lstat end %s %s", name, datetime.datetime.now())
+                    self.log.warning("os.lstat end %s %s", name, datetime.now())
                 except OSError as e:
                     # skip over broken symlinks in listing
                     if e.errno == errno.ENOENT:
@@ -329,13 +329,13 @@ class FileContentsManager(FileManagerMixin, ContentsManager):
                         self.log.warning("Error stat-ing %s: %s", os_path, e)
                     continue
 
-                self.log.warning("stat.IS_checks start %s %s", name, datetime.datetime.now())
+                self.log.warning("stat.IS_checks start %s %s", name, datetime.now())
                 if (not stat.S_ISLNK(st.st_mode)
                         and not stat.S_ISREG(st.st_mode)
                         and not stat.S_ISDIR(st.st_mode)):
                     self.log.debug("%s not a regular file", os_path)
                     continue
-                self.log.warning("stat.IS_checks end %s %s", name, datetime.datetime.now())
+                self.log.warning("stat.IS_checks end %s %s", name, datetime.now())
 
                 try:
                     if self.should_list(name):
